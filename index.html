@@ -461,6 +461,54 @@
         const FALLBACK_CASES = [
              { id: "f1", title: "Vaka 101", difficulty: "Kolay", duration: 600, multiplier: 1.0, name: "Hüseyin Y.", age: 72, gender: "Erkek", complaint: "Duymada güçlük.", audiogramLeft: "250-1000Hz: 20dB", audiogramRight: "Simetrik", extra: "Tip A", fallbackKeywords: ["presbiakuzi"] }
         ];
+        {
+        id: "fallback_extra_1",
+        title: "Vaka 103",
+        difficulty: "Zor",
+        duration: 180,
+        multiplier: 1.5,
+        name: "Murat S.",
+        age: 44,
+        gender: "Erkek",
+        complaint: "Sol kulakta çınlama ve dengesizlik, telefonda konuşurken anlamakta zorlanıyor.",
+        history: ["Tek taraflı tinnitus", "Hafif dengesizlik", "Aile öyküsü yok"],
+        audiogramLeft: "Sensörinöral kayıp, yüksek frekanslarda asimetrik düşüş. SDS %30 (Rollover şüphesi).",
+        audiogramRight: "Normal sınırlar içerisinde. SDS %100.",
+        extra: "ABR: Sol V. dalga latansı uzamış. Tone Decay (+).",
+        fallbackKeywords: ["akustik nöroma", "tümör", "retrokoklear", "asimetrik", "sds", "rollover", "abr", "schwannoma"]
+    },
+    {
+        id: "fallback_extra_2",
+        title: "Vaka 104",
+        difficulty: "Orta",
+        duration: 300,
+        multiplier: 1.25,
+        name: "Kemal T.",
+        age: 50,
+        gender: "Erkek",
+        complaint: "Gürültülü ortamlarda çalışıyorum, ince sesleri duyamıyorum ve kulaklarım ötüyor.",
+        history: ["Meslek: Metal işçisi (20 yıl)", "Koruyucu ekipman kullanımı: Düzensiz"],
+        audiogramLeft: "4000Hz'de belirgin 60dB çentik (V tipi). Diğer frekanslar daha iyi.",
+        audiogramRight: "4000Hz'de belirgin 55dB çentik.",
+        extra: "Timpanogram: Tip A. Refleksler: Var. OAE: 4kHz'de yanıt yok.",
+        fallbackKeywords: ["gürültü", "çentik", "4000", "meslek", "sensörinöral", "koruyucu", "tinnitus", "nihl"]
+    },
+    {
+        id: "fallback_extra_3",
+        title: "Vaka 105",
+        difficulty: "Kolay",
+        duration: 600,
+        multiplier: 1.0,
+        name: "Canan K.",
+        age: 6,
+        gender: "Kız",
+        complaint: "Televizyonun sesini çok açıyor, okulda dersi dinlemiyor.",
+        history: ["Sık geçirilen üst solunum yolu enfeksiyonu", "Geniz eti büyüklüğü"],
+        audiogramLeft: "Hava yolu 30-40 dB, Kemik yolu 0-5 dB (İletim Tipi).",
+        audiogramRight: "Hava yolu 35-45 dB, Kemik yolu 0-5 dB (İletim Tipi).",
+        extra: "Timpanogram: Tip B (Bilateral). Otoskopi: Mat, bombeleşmiş zar.",
+        fallbackKeywords: ["iletim tipi", "efüzyonlu otit", "seröz", "tip b", "geniz eti", "hava kemik aralığı", "som"]
+    }
 
         // --- 3. AUTH LOGIC ---
         auth.onAuthStateChanged((user) => {
@@ -762,3 +810,4 @@
     </script>
 </body>
 </html>
+
