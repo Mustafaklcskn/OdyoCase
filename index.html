@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>OdyoCase | Cerrahpaşa AI</title>
+    <title>OdyoCase</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
@@ -46,7 +46,11 @@
         ::-webkit-scrollbar { width: 6px; height: 6px; }
         ::-webkit-scrollbar-track { background: #f1f1f1; }
         ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 3px; }
+        
+        /* Tamamlanan vaka stili */
         .case-completed { opacity: 0.6; pointer-events: none; filter: grayscale(100%); }
+        
+        /* Admin Paneli İçin Ek Stil */
         .admin-section { min-height: calc(100vh - 64px); }
         .tab-content { display: none; }
         .tab-content.active { display: block; }
@@ -64,6 +68,7 @@
                 <span class="font-bold text-lg sm:text-xl tracking-tight text-gray-900">Odyo<span class="text-odyo-600">Case</span></span>
             </div>
             
+            <!-- Timer (Düzeltildi ve Görünürlüğü Garanti Altına Alındı) -->
             <div id="timer-container" class="absolute left-1/2 transform -translate-x-1/2 hidden items-center gap-2 bg-gray-900 text-white px-3 sm:px-4 py-1 sm:py-1.5 rounded-full font-mono text-base sm:text-lg font-bold shadow-lg transition-colors duration-300 min-w-[90px] justify-center z-30">
                 <i class="fa-regular fa-clock text-odyo-500 text-sm sm:text-base" id="timer-icon"></i>
                 <span id="timer-display">00:00</span>
@@ -98,7 +103,7 @@
             
             <form id="auth-form" class="space-y-4">
                 <div id="name-field" class="hidden">
-                    <input type="text" id="student-name" placeholder="Adınız Soyadınız (Örn: Burak)" class="w-full px-4 py-3.5 border border-gray-300 rounded-xl focus:ring-2 focus:ring-odyo-500 focus:border-odyo-500 outline-none text-center font-semibold text-gray-800 placeholder-gray-400 transition bg-gray-50 focus:bg-white">
+                    <input type="text" id="student-name" required placeholder="Adınız Soyadınız (Örn: Burak)" class="w-full px-4 py-3.5 border border-gray-300 rounded-xl focus:ring-2 focus:ring-odyo-500 focus:border-odyo-500 outline-none text-center font-semibold text-gray-800 placeholder-gray-400 transition bg-gray-50 focus:bg-white">
                 </div>
                 <div>
                     <input type="email" id="auth-email" required placeholder="E-posta Adresi" class="w-full px-4 py-3.5 border border-gray-300 rounded-xl focus:ring-2 focus:ring-odyo-500 focus:border-odyo-500 outline-none text-center font-semibold text-gray-800 placeholder-gray-400 transition bg-gray-50 focus:bg-white">
@@ -135,17 +140,17 @@
                     <i class="fa-solid fa-times text-xl"></i>
                 </button>
             </div>
-            <!-- Admin içeriği (Eski kodla aynı) -->
-             <div class="bg-white rounded-xl shadow-lg border border-gray-100 p-6">
+
+            <div class="bg-white rounded-xl shadow-lg border border-gray-100 p-6">
                 <nav class="flex space-x-2 border-b mb-6">
                     <button onclick="changeAdminTab('add-case')" class="admin-tab-btn active text-sm font-medium px-4 py-2 border-b-2 border-odyo-600 text-odyo-600 transition">Vaka Ekle</button>
                     <button onclick="changeAdminTab('list-cases')" class="admin-tab-btn text-sm font-medium px-4 py-2 border-b-2 border-transparent text-gray-500 hover:text-gray-700 transition">Vakaları Yönet</button>
                 </nav>
 
+                <!-- VAKA EKLEME TABI -->
                 <div id="add-case" class="tab-content active">
                     <h2 class="text-lg font-semibold text-gray-800 mb-4">Yeni Vaka Oluşturma</h2>
                     <form id="add-case-form" class="space-y-4">
-                         <!-- Form İçeriği -->
                         <div class="grid sm:grid-cols-2 gap-4">
                             <div>
                                 <label class="block text-xs font-bold text-gray-500 mb-1">Vaka Adı (Otomatik)</label>
@@ -160,92 +165,297 @@
                                 </select>
                             </div>
                         </div>
-                         <div class="grid sm:grid-cols-3 gap-4">
-                            <div><label class="block text-xs font-bold text-gray-500 mb-1">Hasta Adı</label><input type="text" id="new-case-name" required class="w-full px-4 py-2 border rounded-lg text-sm"></div>
-                            <div><label class="block text-xs font-bold text-gray-500 mb-1">Yaş</label><input type="number" id="new-case-age" required class="w-full px-4 py-2 border rounded-lg text-sm"></div>
-                            <div><label class="block text-xs font-bold text-gray-500 mb-1">Cinsiyet</label><input type="text" id="new-case-gender" required class="w-full px-4 py-2 border rounded-lg text-sm"></div>
+
+                        <div class="grid sm:grid-cols-3 gap-4">
+                            <div>
+                                <label class="block text-xs font-bold text-gray-500 mb-1">Hasta Adı (Örn: Ayşe K.)</label>
+                                <input type="text" id="new-case-name" required class="w-full px-4 py-2 border rounded-lg text-sm" placeholder="Hasta Adı">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-bold text-gray-500 mb-1">Yaş</label>
+                                <input type="number" id="new-case-age" required class="w-full px-4 py-2 border rounded-lg text-sm" placeholder="Yaş">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-bold text-gray-500 mb-1">Cinsiyet</label>
+                                <input type="text" id="new-case-gender" required class="w-full px-4 py-2 border rounded-lg text-sm" placeholder="Erkek/Kadın">
+                            </div>
                         </div>
-                        <div><label class="block text-xs font-bold text-gray-500 mb-1">Hasta Şikayeti</label><textarea id="new-case-complaint" required class="w-full px-4 py-2 border rounded-lg text-sm h-16"></textarea></div>
+
+                        <div>
+                            <label class="block text-xs font-bold text-gray-500 mb-1">Hasta Şikayeti (Anamnez)</label>
+                            <textarea id="new-case-complaint" required class="w-full px-4 py-2 border rounded-lg text-sm h-16" placeholder="Hasta neyden şikayetçi?"></textarea>
+                        </div>
+
                         <div class="grid sm:grid-cols-2 gap-4">
-                            <div><label class="block text-xs font-bold text-gray-500 mb-1">SOL Kulak Bulguları</label><textarea id="new-case-audiogram-left" required class="w-full px-4 py-2 border rounded-lg text-sm h-20"></textarea></div>
-                            <div><label class="block text-xs font-bold text-gray-500 mb-1">SAĞ Kulak Bulguları</label><textarea id="new-case-audiogram-right" required class="w-full px-4 py-2 border rounded-lg text-sm h-20"></textarea></div>
+                            <div>
+                                <label class="block text-xs font-bold text-gray-500 mb-1">SOL Kulak Bulguları</label>
+                                <textarea id="new-case-audiogram-left" required class="w-full px-4 py-2 border rounded-lg text-sm h-20" placeholder="Örn: 250-1000Hz: 20dB, 2000Hz sonrası 8000Hz'e kadar eğimli düşüş (70dB)."></textarea>
+                            </div>
+                            <div>
+                                <label class="block text-xs font-bold text-gray-500 mb-1">SAĞ Kulak Bulguları</label>
+                                <textarea id="new-case-audiogram-right" required class="w-full px-4 py-2 border rounded-lg text-sm h-20" placeholder="Örn: Normal sınırlar içerisinde."></textarea>
+                            </div>
                         </div>
-                        <div><label class="block text-xs font-bold text-gray-500 mb-1">Ek Bulgular</label><textarea id="new-case-extra" required class="w-full px-4 py-2 border rounded-lg text-sm h-20"></textarea></div>
-                        <div><label class="block text-xs font-bold text-red-500 mb-1">Yedek Anahtar Kelimeler (ZORUNLU!)</label><input type="text" id="new-case-fallback-keywords" required class="w-full px-4 py-2 border border-red-300 rounded-lg text-sm" placeholder="Örn: presbiakuzi, sensörinöral"></div>
+
+                        <div>
+                            <label class="block text-xs font-bold text-gray-500 mb-1">Ek Bulgular (İmpedans, ABR, Tinnutus, Geçmiş)</label>
+                            <textarea id="new-case-extra" required class="w-full px-4 py-2 border rounded-lg text-sm h-20" placeholder="Örn: Timpanogram: Tip As. Akustik Refleksler: Yok."></textarea>
+                        </div>
                         
-                        <button type="submit" class="w-full bg-odyo-600 text-white font-bold py-3 rounded-xl hover:bg-odyo-700 transition flex items-center justify-center gap-2 mt-6"><i class="fa-solid fa-plus-circle"></i> Vaka Ekle</button>
+                        <div>
+                            <label class="block text-xs font-bold text-red-500 mb-1">Yedek Anahtar Kelimeler (ZORUNLU! Virgülle ayırın, küçük harf kullanın.)</label>
+                            <input type="text" id="new-case-fallback-keywords" required class="w-full px-4 py-2 border border-red-300 rounded-lg text-sm" placeholder="Örn: presbiakuzi, sensörinöral, simetrik, yüksek frekans">
+                            <p class="text-xs text-gray-500 mt-1">Bu kelimeler, AI başarısız olursa puanlamada kullanılır.</p>
+                        </div>
+
+                        <button type="submit" class="w-full bg-odyo-600 text-white font-bold py-3 rounded-xl hover:bg-odyo-700 transition flex items-center justify-center gap-2 mt-6">
+                            <i class="fa-solid fa-plus-circle"></i> Vaka Ekle
+                        </button>
                         <p id="admin-message" class="text-center text-sm text-green-600 mt-3 hidden"></p>
                     </form>
                 </div>
 
+                <!-- VAKA LİSTESİ TABI -->
                 <div id="list-cases" class="tab-content">
                     <h2 class="text-lg font-semibold text-gray-800 mb-4">Mevcut Vakalar</h2>
-                    <div id="dynamic-case-management-list" class="space-y-3"><p class="text-gray-500 text-sm">Vakalar yükleniyor...</p></div>
+                    <div id="dynamic-case-management-list" class="space-y-3">
+                        <p class="text-gray-500 text-sm">Vakalar yükleniyor...</p>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
     
-    <!-- Main Content (Lists, Case View) -->
+    <!-- Ana İçerik -->
     <div id="main-content" class="flex flex-1 overflow-hidden relative hidden">
+        
+        <!-- Sol Panel: Vaka Listesi (Desktop) -->
         <aside class="w-80 bg-white border-r border-gray-200 overflow-y-auto hidden md:block flex-shrink-0 z-10">
             <div class="p-5 border-b border-gray-100 bg-gray-50/50 sticky top-0 backdrop-blur-sm">
                 <h3 class="text-xs font-bold text-gray-400 uppercase tracking-wider mb-1">Poliklinik Listesi</h3>
                 <p class="text-xs text-gray-500">Zorluk arttıkça süre azalır.</p>
             </div>
-            <div id="case-list" class="p-3 space-y-3"><p class="text-gray-500 text-sm p-2">Vakalar yükleniyor...</p></div>
+            <div id="case-list" class="p-3 space-y-3">
+                 <p class="text-gray-500 text-sm p-2">Vakalar yükleniyor...</p>
+            </div>
         </aside>
+
+        <!-- Orta Panel -->
         <main class="flex-1 overflow-y-auto bg-slate-50 relative custom-scrollbar pb-24 md:pb-0">
+            
+            <!-- Mobil Vaka Seçici -->
             <div class="md:hidden p-4 bg-white border-b border-gray-200 shadow-sm">
                 <label class="text-xs font-bold text-gray-500 uppercase block mb-2">Vaka Seçimi</label>
-                <select id="mobile-case-select" class="w-full p-3 border border-gray-300 rounded-lg bg-gray-50 font-medium text-sm focus:ring-2 focus:ring-odyo-500 outline-none"><option value="" disabled selected>Bir hasta seçiniz...</option></select>
+                <select id="mobile-case-select" class="w-full p-3 border border-gray-300 rounded-lg bg-gray-50 font-medium text-sm focus:ring-2 focus:ring-odyo-500 outline-none">
+                    <option value="" disabled selected>Bir hasta seçiniz...</option>
+                </select>
             </div>
+
+            <!-- Boş Durum -->
             <div id="empty-state" class="flex flex-col items-center justify-center h-[60vh] text-center text-gray-400 px-4">
-                <div class="w-24 h-24 bg-white rounded-full flex items-center justify-center mb-6 shadow-sm border border-gray-100 animate-bounce-slow"><i class="fa-solid fa-clipboard-list text-4xl text-odyo-200"></i></div>
-                <h2 class="text-xl font-bold text-gray-600 mb-2">Vaka Bekleniyor</h2><p class="text-sm max-w-xs mx-auto">Sol menüden (veya mobilde yukarıdan) bir hasta seçerek süreli simülasyonu başlat.</p>
+                <div class="w-24 h-24 bg-white rounded-full flex items-center justify-center mb-6 shadow-sm border border-gray-100 animate-bounce-slow">
+                    <i class="fa-solid fa-clipboard-list text-4xl text-odyo-200"></i>
+                </div>
+                <h2 class="text-xl font-bold text-gray-600 mb-2">Vaka Bekleniyor</h2>
+                <p class="text-sm max-w-xs mx-auto">Sol menüden (veya mobilde yukarıdan) bir hasta seçerek süreli simülasyonu başlat.</p>
             </div>
+
+            <!-- Vaka İçeriği -->
             <div id="case-content" class="hidden max-w-6xl mx-auto space-y-6 p-4 lg:p-8 pb-32">
-                <div id="time-warning" class="hidden bg-red-50 border-l-4 border-red-500 p-4 rounded-r shadow-sm animate-pulse"><div class="flex items-center"><div class="flex-shrink-0"><i class="fa-solid fa-heart-pulse text-red-500 text-xl"></i></div><div class="ml-3"><p class="text-sm text-red-700 font-bold">Nabız yükseliyor! Son saniyeler.</p></div></div></div>
+                
+                <!-- Uyarı Banner -->
+                <div id="time-warning" class="hidden bg-red-50 border-l-4 border-red-500 p-4 rounded-r shadow-sm animate-pulse">
+                    <div class="flex items-center">
+                        <div class="flex-shrink-0"><i class="fa-solid fa-heart-pulse text-red-500 text-xl"></i></div>
+                        <div class="ml-3"><p class="text-sm text-red-700 font-bold">Nabız yükseliyor! Son saniyeler.</p></div>
+                    </div>
+                </div>
+
+                <!-- Hasta Header -->
                 <div class="bg-white rounded-2xl p-5 shadow-sm border border-gray-200 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 relative overflow-hidden">
                     <div class="absolute top-0 left-0 w-1.5 h-full bg-gray-200" id="difficulty-bar"></div>
                     <div class="flex items-center gap-4 pl-2">
-                        <div class="w-12 h-12 rounded-full bg-gray-100 text-gray-600 flex items-center justify-center font-bold text-xl border border-gray-200"><i class="fa-solid fa-user"></i></div>
-                        <div><div class="flex flex-wrap items-center gap-2"><h2 id="patient-name" class="text-xl sm:text-2xl font-bold text-gray-900">--</h2><span id="difficulty-badge" class="text-[10px] px-2 py-0.5 rounded font-bold bg-gray-100 text-gray-600 uppercase tracking-wide">--</span></div><div class="flex gap-3 text-sm text-gray-500 mt-0.5"><span id="patient-details">--</span></div></div>
+                        <div class="w-12 h-12 rounded-full bg-gray-100 text-gray-600 flex items-center justify-center font-bold text-xl border border-gray-200">
+                            <i class="fa-solid fa-user"></i>
+                        </div>
+                        <div>
+                            <div class="flex flex-wrap items-center gap-2">
+                                <h2 id="patient-name" class="text-xl sm:text-2xl font-bold text-gray-900">--</h2>
+                                <span id="difficulty-badge" class="text-[10px] px-2 py-0.5 rounded font-bold bg-gray-100 text-gray-600 uppercase tracking-wide">--</span>
+                            </div>
+                            <div class="flex gap-3 text-sm text-gray-500 mt-0.5">
+                                <span id="patient-details">--</span>
+                            </div>
+                        </div>
                     </div>
-                    <button onclick="getAIHint()" id="hint-btn" class="mt-4 sm:mt-0 flex items-center gap-2 px-4 py-2 bg-purple-50 text-purple-700 hover:bg-purple-100 rounded-full border border-purple-200 text-xs font-bold transition shadow-sm group"><i class="fa-solid fa-wand-magic-sparkles group-hover:animate-spin-slow"></i> ✨ İpucu Al (AI)</button>
+                    <!-- AI Hint Button -->
+                    <button onclick="getAIHint()" id="hint-btn" class="mt-4 sm:mt-0 flex items-center gap-2 px-4 py-2 bg-purple-50 text-purple-700 hover:bg-purple-100 rounded-full border border-purple-200 text-xs font-bold transition shadow-sm group">
+                        <i class="fa-solid fa-wand-magic-sparkles group-hover:animate-spin-slow"></i> ✨ İpucu Al (AI)
+                    </button>
                 </div>
+
                 <div class="grid lg:grid-cols-12 gap-6 items-start">
+                    <!-- Sol: Bulgular -->
                     <div class="lg:col-span-7 space-y-6">
-                        <div class="bg-white rounded-2xl shadow-sm border border-gray-200 overflow-hidden"><div class="bg-gray-50 px-5 py-3 border-b border-gray-200 flex justify-between items-center"><h3 class="font-bold text-gray-800 flex items-center gap-2 text-sm sm:text-base"><i class="fa-solid fa-wave-square text-odyo-600"></i> Odyometrik Bulgular</h3></div><div class="p-5"><div class="grid grid-cols-1 gap-4"><div class="relative pl-4 border-l-4 border-blue-500"><span class="text-blue-700 font-bold text-xs block mb-1">SOL KULAK (Blue X)</span><p id="left-ear-data" class="text-sm text-gray-700 font-mono">--</p></div><div class="relative pl-4 border-l-4 border-red-500"><span class="text-red-700 font-bold text-xs block mb-1">SAĞ KULAK (Red O)</span><p id="right-ear-data" class="text-sm text-gray-700 font-mono">--</p></div></div><div class="mt-4 pt-4 border-t border-dashed border-gray-200"><span class="text-xs font-bold text-gray-500 uppercase block mb-1">İmpedans & Diğer</span><p id="extra-findings" class="text-sm text-gray-600">--</p></div></div></div>
-                        <div class="bg-white rounded-2xl shadow-sm border border-gray-200 overflow-hidden"><div class="bg-gray-50 px-5 py-3 border-b border-gray-200"><h3 class="font-bold text-gray-800 text-sm sm:text-base">Anamnez</h3></div><div class="p-5"><div class="bg-yellow-50 p-3 rounded-lg border border-yellow-100 mb-4"><span class="text-xs font-bold text-yellow-700 block mb-1">Hasta Şikayeti:</span><p id="full-complaint" class="text-gray-800 font-medium text-sm italic">"--"</p></div><ul class="space-y-2" id="history-list"></ul></div></div>
+                        <!-- Odyogram Verisi -->
+                        <div class="bg-white rounded-2xl shadow-sm border border-gray-200 overflow-hidden">
+                            <div class="bg-gray-50 px-5 py-3 border-b border-gray-200 flex justify-between items-center">
+                                <h3 class="font-bold text-gray-800 flex items-center gap-2 text-sm sm:text-base">
+                                    <i class="fa-solid fa-wave-square text-odyo-600"></i> Odyometrik Bulgular
+                                </h3>
+                            </div>
+                            <div class="p-5">
+                                <div class="grid grid-cols-1 gap-4">
+                                    <div class="relative pl-4 border-l-4 border-blue-500">
+                                        <span class="text-blue-700 font-bold text-xs block mb-1">SOL KULAK (Blue X)</span>
+                                        <p id="left-ear-data" class="text-sm text-gray-700 font-mono">--</p>
+                                    </div>
+                                    <div class="relative pl-4 border-l-4 border-red-500">
+                                        <span class="text-red-700 font-bold text-xs block mb-1">SAĞ KULAK (Red O)</span>
+                                        <p id="right-ear-data" class="text-sm text-gray-700 font-mono">--</p>
+                                    </div>
+                                </div>
+                                <div class="mt-4 pt-4 border-t border-dashed border-gray-200">
+                                    <span class="text-xs font-bold text-gray-500 uppercase block mb-1">İmpedans & Diğer</span>
+                                    <p id="extra-findings" class="text-sm text-gray-600">--</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Anamnez -->
+                        <div class="bg-white rounded-2xl shadow-sm border border-gray-200 overflow-hidden">
+                            <div class="bg-gray-50 px-5 py-3 border-b border-gray-200">
+                                <h3 class="font-bold text-gray-800 text-sm sm:text-base">Anamnez</h3>
+                            </div>
+                            <div class="p-5">
+                                <div class="bg-yellow-50 p-3 rounded-lg border border-yellow-100 mb-4">
+                                    <span class="text-xs font-bold text-yellow-700 block mb-1">Hasta Şikayeti:</span>
+                                    <p id="full-complaint" class="text-gray-800 font-medium text-sm italic">"--"</p>
+                                </div>
+                                <ul class="space-y-2" id="history-list"></ul>
+                            </div>
+                        </div>
                     </div>
+
+                    <!-- Sağ: Rapor -->
                     <div class="lg:col-span-5 flex flex-col">
                         <div class="bg-white rounded-2xl shadow-sm border border-gray-200 flex flex-col overflow-hidden sticky top-6">
-                            <div class="bg-gray-900 text-white px-5 py-3 flex justify-between items-center"><span class="font-bold text-sm">Tanı Raporu</span><span class="text-[10px] bg-purple-600 px-2 py-0.5 rounded text-white flex items-center gap-1"><i class="fa-solid fa-robot"></i> AI Puanlama</span></div>
+                            <div class="bg-gray-900 text-white px-5 py-3 flex justify-between items-center">
+                                <span class="font-bold text-sm">Tanı Raporu</span>
+                                <span class="text-[10px] bg-purple-600 px-2 py-0.5 rounded text-white flex items-center gap-1"><i class="fa-solid fa-robot"></i> AI Puanlama</span>
+                            </div>
+                            
                             <div class="relative">
                                 <textarea id="student-report" class="w-full h-64 lg:h-80 p-5 outline-none resize-none text-sm leading-relaxed text-gray-700 font-medium disabled:bg-gray-100 disabled:text-gray-400 transition-colors" placeholder="Bulguları yorumlayın... İşitme kaybının tipi, derecesi ve konfigürasyonu nedir?"></textarea>
-                                <div id="ai-loading" class="hidden absolute inset-0 bg-white/90 backdrop-blur-sm flex flex-col items-center justify-center text-center p-6 z-20"><div class="relative w-16 h-16 mb-4"><div class="absolute inset-0 border-4 border-gray-200 rounded-full"></div><div class="absolute inset-0 border-4 border-purple-600 rounded-full border-t-transparent animate-spin"></div><i class="fa-solid fa-brain absolute inset-0 flex items-center justify-center text-purple-600 text-xl"></i></div><h3 class="text-lg font-bold text-gray-900">Rapor İnceleniyor...</h3><p class="text-xs text-gray-500 mt-1">Yapay zeka klinik doğruluğu analiz ediyor.</p></div>
-                                <div id="timeout-overlay" class="hidden absolute inset-0 bg-gray-50/90 backdrop-blur-sm flex flex-col items-center justify-center text-center p-6 z-10"><div class="w-16 h-16 bg-red-100 text-red-600 rounded-full flex items-center justify-center text-3xl mb-3 animate-bounce"><i class="fa-solid fa-hourglass-end"></i></div><h3 class="text-lg font-bold text-gray-900">Hasta Ayrıldı!</h3><p class="text-xs text-gray-500 mt-1 mb-4">Süre doldu.</p><button onclick="resetCase()" class="px-5 py-2 bg-gray-900 text-white rounded-lg text-sm hover:bg-gray-800 transition">Sıradaki Hasta</button></div>
+                                
+                                <!-- AI Loading -->
+                                <div id="ai-loading" class="hidden absolute inset-0 bg-white/90 backdrop-blur-sm flex flex-col items-center justify-center text-center p-6 z-20">
+                                    <div class="relative w-16 h-16 mb-4">
+                                        <div class="absolute inset-0 border-4 border-gray-200 rounded-full"></div>
+                                        <div class="absolute inset-0 border-4 border-purple-600 rounded-full border-t-transparent animate-spin"></div>
+                                        <i class="fa-solid fa-brain absolute inset-0 flex items-center justify-center text-purple-600 text-xl"></i>
+                                    </div>
+                                    <h3 class="text-lg font-bold text-gray-900">Rapor İnceleniyor...</h3>
+                                    <p class="text-xs text-gray-500 mt-1">Yapay zeka klinik doğruluğu analiz ediyor.</p>
+                                </div>
+
+                                <!-- Timeout -->
+                                <div id="timeout-overlay" class="hidden absolute inset-0 bg-gray-50/90 backdrop-blur-sm flex flex-col items-center justify-center text-center p-6 z-10">
+                                    <div class="w-16 h-16 bg-red-100 text-red-600 rounded-full flex items-center justify-center text-3xl mb-3 animate-bounce">
+                                        <i class="fa-solid fa-hourglass-end"></i>
+                                    </div>
+                                    <h3 class="text-lg font-bold text-gray-900">Hasta Ayrıldı!</h3>
+                                    <p class="text-xs text-gray-500 mt-1 mb-4">Süre doldu. Gerçek hayatta bu kadar düşünme vaktimiz olmayabilir.</p>
+                                    <button onclick="resetCase()" class="px-5 py-2 bg-gray-900 text-white rounded-lg text-sm hover:bg-gray-800 transition">Sıradaki Hasta</button>
+                                </div>
                             </div>
-                            <div class="p-4 border-t border-gray-100 bg-gray-50"><button id="submit-btn" onclick="submitReportWithAI()" class="w-full bg-gray-900 hover:bg-gray-800 text-white py-3.5 rounded-xl text-sm font-bold transition shadow-lg shadow-gray-900/20 flex items-center justify-center gap-2 transform active:scale-95"><span>✨ Raporu Onayla ve Puanla</span><i class="fa-solid fa-paper-plane"></i></button></div>
+
+                            <div class="p-4 border-t border-gray-100 bg-gray-50">
+                                <button id="submit-btn" onclick="submitReportWithAI()" class="w-full bg-gray-900 hover:bg-gray-800 text-white py-3.5 rounded-xl text-sm font-bold transition shadow-lg shadow-gray-900/20 flex items-center justify-center gap-2 transform active:scale-95">
+                                    <span>✨ Raporu Onayla ve Puanla</span>
+                                    <i class="fa-solid fa-paper-plane"></i>
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </main>
+
         <!-- Leaderboard Drawer -->
-        <div id="leaderboard-panel" class="fixed inset-y-0 right-0 w-full sm:w-96 bg-white shadow-2xl transform translate-x-full transition-transform duration-300 z-50 flex flex-col"><div class="p-5 bg-cerrahpasa-900 text-white flex justify-between items-center"><div><h3 class="font-bold text-lg">Genel Sıralama</h3><p class="text-xs text-blue-200">Cerrahpaşa Odyoloji Ligi (Toplam Puan)</p></div><button onclick="toggleLeaderboard()" class="w-8 h-8 flex items-center justify-center rounded-full bg-white/10 hover:bg-white/20 transition"><i class="fa-solid fa-times"></i></button></div><div class="flex-1 overflow-y-auto bg-gray-50 p-2"><div id="leaderboard-list" class="space-y-2"></div></div></div><div id="leaderboard-overlay" onclick="toggleLeaderboard()" class="fixed inset-0 bg-black/30 backdrop-blur-sm z-40 hidden"></div>
+        <div id="leaderboard-panel" class="fixed inset-y-0 right-0 w-full sm:w-96 bg-white shadow-2xl transform translate-x-full transition-transform duration-300 z-50 flex flex-col">
+            <div class="p-5 bg-cerrahpasa-900 text-white flex justify-between items-center">
+                <div>
+                    <h3 class="font-bold text-lg">Genel Sıralama</h3>
+                    <p class="text-xs text-blue-200">Cerrahpaşa Odyoloji Ligi (Toplam Puan)</p>
+                </div>
+                <button onclick="toggleLeaderboard()" class="w-8 h-8 flex items-center justify-center rounded-full bg-white/10 hover:bg-white/20 transition"><i class="fa-solid fa-times"></i></button>
+            </div>
+            <div class="flex-1 overflow-y-auto bg-gray-50 p-2">
+                <div id="leaderboard-list" class="space-y-2"></div>
+            </div>
+        </div>
+        <div id="leaderboard-overlay" onclick="toggleLeaderboard()" class="fixed inset-0 bg-black/30 backdrop-blur-sm z-40 hidden"></div>
+
     </div>
 
-    <!-- Feedback & Hint Modals -->
-    <div id="feedback-modal" class="modal fixed inset-0 z-50 bg-gray-900/80 backdrop-blur-sm flex items-center justify-center p-4"><div class="bg-white rounded-3xl shadow-2xl max-w-md w-full overflow-hidden transform transition-all scale-95 relative"><button onclick="closeFeedback()" class="absolute top-4 right-4 text-white/70 hover:text-white z-20"><i class="fa-solid fa-times text-xl"></i></button><div class="relative bg-gradient-to-br from-odyo-500 to-cerrahpasa-900 p-10 text-center text-white"><div id="modal-bg-pattern" class="absolute inset-0 opacity-10 bg-[url('https://www.transparenttextures.com/patterns/diagmonds-light.png')]"></div><div class="relative z-10"><div class="inline-block mb-2 bg-white/10 px-3 py-1 rounded-full text-[10px] font-bold tracking-widest uppercase border border-white/20">Sonuç</div><div class="text-7xl font-black tracking-tighter drop-shadow-xl" id="score-display">0</div><div class="text-sm font-medium opacity-90 mt-1" id="score-calc-detail">PUAN</div></div></div><div class="p-6 sm:p-8"><div id="feedback-text" class="text-gray-600 text-sm mb-6 font-medium leading-relaxed text-center bg-gray-50 p-4 rounded-xl border border-gray-100"></div><div class="mb-6"><h5 class="text-[10px] font-bold text-gray-400 uppercase mb-3 tracking-wide text-center">Tespit Edilen Kavramlar</h5><div id="keywords-display" class="flex flex-wrap gap-2 justify-center"></div></div><div class="grid grid-cols-2 gap-3"><button onclick="shareResult()" class="col-span-1 bg-green-500 hover:bg-green-600 text-white py-3 rounded-xl font-bold text-sm transition flex items-center justify-center gap-2"><i class="fa-brands fa-whatsapp"></i> Paylaş</button><button onclick="closeFeedback()" class="col-span-1 bg-gray-900 hover:bg-gray-800 text-white py-3 rounded-xl font-bold text-sm transition">Listeye Dön</button></div><p id="share-toast" class="text-center text-green-600 text-xs font-bold mt-3 hidden opacity-0 transition-opacity duration-500">Metin kopyalandı!</p></div></div></div>
-    <div id="hint-modal" class="modal fixed inset-0 z-50 bg-black/40 backdrop-blur-sm flex items-center justify-center p-4"><div class="bg-white rounded-2xl shadow-xl max-w-sm w-full p-6 border-t-4 border-purple-500 relative"><button onclick="document.getElementById('hint-modal').classList.remove('active')" class="absolute top-4 right-4 text-gray-400 hover:text-gray-600"><i class="fa-solid fa-times"></i></button><div class="w-12 h-12 bg-purple-100 text-purple-600 rounded-full flex items-center justify-center text-xl mb-4"><i class="fa-solid fa-lightbulb"></i></div><h4 class="text-lg font-bold text-gray-900 mb-2">Klinik İpucu</h4><p id="hint-text" class="text-sm text-gray-600 leading-relaxed">Yapay zeka düşünüyor...</p></div></div>
+    <!-- Feedback Modalı -->
+    <div id="feedback-modal" class="modal fixed inset-0 z-50 bg-gray-900/80 backdrop-blur-sm flex items-center justify-center p-4">
+        <div class="bg-white rounded-3xl shadow-2xl max-w-md w-full overflow-hidden transform transition-all scale-95 relative">
+            <!-- Close Button -->
+            <button onclick="closeFeedback()" class="absolute top-4 right-4 text-white/70 hover:text-white z-20"><i class="fa-solid fa-times text-xl"></i></button>
+            
+            <div class="relative bg-gradient-to-br from-odyo-500 to-cerrahpasa-900 p-10 text-center text-white">
+                <div id="modal-bg-pattern" class="absolute inset-0 opacity-10 bg-[url('https://www.transparenttextures.com/patterns/diagmonds-light.png')]"></div>
+                <div class="relative z-10">
+                    <div class="inline-block mb-2 bg-white/10 px-3 py-1 rounded-full text-[10px] font-bold tracking-widest uppercase border border-white/20">Sonuç</div>
+                    <div class="text-7xl font-black tracking-tighter drop-shadow-xl" id="score-display">0</div>
+                    <div class="text-sm font-medium opacity-90 mt-1" id="score-calc-detail">PUAN</div>
+                </div>
+            </div>
+            
+            <div class="p-6 sm:p-8">
+                <div id="feedback-text" class="text-gray-600 text-sm mb-6 font-medium leading-relaxed text-center bg-gray-50 p-4 rounded-xl border border-gray-100"></div>
+                
+                <div class="mb-6">
+                    <h5 class="text-[10px] font-bold text-gray-400 uppercase mb-3 tracking-wide text-center">Tespit Edilen Kavramlar</h5>
+                    <div id="keywords-display" class="flex flex-wrap gap-2 justify-center"></div>
+                </div>
+
+                <div class="grid grid-cols-2 gap-3">
+                    <button onclick="shareResult()" class="col-span-1 bg-green-500 hover:bg-green-600 text-white py-3 rounded-xl font-bold text-sm transition flex items-center justify-center gap-2">
+                        <i class="fa-brands fa-whatsapp"></i> Paylaş
+                    </button>
+                    <button onclick="closeFeedback()" class="col-span-1 bg-gray-900 hover:bg-gray-800 text-white py-3 rounded-xl font-bold text-sm transition">
+                        Listeye Dön
+                    </button>
+                </div>
+                <p id="share-toast" class="text-center text-green-600 text-xs font-bold mt-3 hidden opacity-0 transition-opacity duration-500">Metin kopyalandı!</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Hint Modal -->
+    <div id="hint-modal" class="modal fixed inset-0 z-50 bg-black/40 backdrop-blur-sm flex items-center justify-center p-4">
+         <div class="bg-white rounded-2xl shadow-xl max-w-sm w-full p-6 border-t-4 border-purple-500 relative">
+             <button onclick="document.getElementById('hint-modal').classList.remove('active')" class="absolute top-4 right-4 text-gray-400 hover:text-gray-600"><i class="fa-solid fa-times"></i></button>
+             <div class="w-12 h-12 bg-purple-100 text-purple-600 rounded-full flex items-center justify-center text-xl mb-4">
+                 <i class="fa-solid fa-lightbulb"></i>
+             </div>
+             <h4 class="text-lg font-bold text-gray-900 mb-2">Klinik İpucu</h4>
+             <p id="hint-text" class="text-sm text-gray-600 leading-relaxed">Yapay zeka düşünüyor...</p>
+         </div>
+    </div>
 
     <script type="module">
-        // 1. GEMINI API KEY
-        const apiKey = "AIzaSyCBz6BLBnAdIV-3iIb4-zYZvYag9Qk63n4"; 
+        // ---------------------------------------------------------------------------------------------------------------------------------
+        // DİKKAT: BU KISIMDAKİ AYARLARI KONTROL EDİNİZ.
+        // ---------------------------------------------------------------------------------------------------------------------------------
         
-        // 2. FIREBASE AYARLARI
+        // 1. KENDİ GEMINI API KEY'İNİZİ BURAYA YAPIŞTIRIN! (ZORUNLU)
+        const apiKey = "AIzaSyCBz6BLBnAdIV-3iIb4-zYZvYag9Qk63n4";
+        
+        // 2. SİZİN SAĞLADIĞINIZ FIREBASE AYARLARI BURAYA YERLEŞTİRİLDİ.
         const publicFirebaseConfig = {
             apiKey: "AIzaSyCdBiKPHQCPhjda_gKh5f_wSVSpsjrkLK0",
             authDomain: "odyocase.firebaseapp.com",
@@ -256,84 +466,311 @@
             measurementId: "G-XVZ6MXCGRN"
         };
         
+        // Bu kısım, uygulamanın hangi ortamda çalıştığını kontrol eder.
         const firebaseConfig = (typeof __firebase_config !== 'undefined' ? JSON.parse(__firebase_config) : publicFirebaseConfig);
-        const appId = firebaseConfig.projectId || 'odyocase-default-app'; 
+        const appId = firebaseConfig.projectId || 'odyocase-default-app'; // App ID için güvenli fallback
         
-        // Init
+        // Firebase Başlatma
         const app = firebase.initializeApp(firebaseConfig);
         const auth = firebase.auth();
         const db = firebase.firestore();
         const geminiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${apiKey}`;
         
-        let currentUser = null, currentCaseId = null, userName = "", timerInterval = null, timeLeft = 0, lastScore = 0, lastCaseTitle = "", solvedCaseIds = new Set(), authMode = 'signin', isAdmin = false, dynamicCases = [];
+        // --- Global State ---
+        let currentUser = null;
+        let currentCaseId = null;
+        let userName = "";
+        let timerInterval = null;
+        let timeLeft = 0;
+        let lastScore = 0;
+        let lastCaseTitle = "";
+        let solvedCaseIds = new Set(); // Track completed cases
+        let authMode = 'signin'; // DEFAULT AYARI: 'signin' olarak değiştirildi
+        let isAdmin = false; // Admin yetkisi kontrolü
+        let dynamicCases = []; // Dinamik olarak çekilen vakalar
         
-        // --- FALLBACK CASES ---
+        // --- Vaka Kütüphanesi (Sadece ilk çalıştırma/yedek için kullanılır) ---
         const FALLBACK_CASES = [
-            { id: "f1", title: "Vaka 101", difficulty: "Kolay", duration: 600, multiplier: 1.0, name: "Hüseyin Y.", age: 72, gender: "Erkek", complaint: "Duymada güçlük.", audiogramLeft: "250-1000Hz: 20dB, 8kHz: 70dB.", audiogramRight: "Simetrik.", extra: "Tip A.", fallbackKeywords: ["presbiakuzi", "simetrik", "sensörinöral"] }
+            {
+                id: "fallback1",
+                title: "Vaka 101",
+                difficulty: "Kolay",
+                duration: 600, 
+                multiplier: 1.0,
+                name: "Hüseyin Y.",
+                age: 72,
+                gender: "Erkek",
+                complaint: "Kalabalıkta konuşmaları ayırt edemiyor, TV sesini çok açıyor.",
+                history: ["Hipertansiyon: Var", "Gürültü öyküsü: Yok", "Tinnitus: Bilateral hafif"],
+                audiogramLeft: "250-1000Hz: 20dB, 2000Hz sonrası 8000Hz'e kadar eğimli düşüş (70dB).",
+                audiogramRight: "250-1000Hz: 25dB, 2000Hz sonrası 8000Hz'e kadar eğimli düşüş (75dB).",
+                extra: "Timpanogram: Tip A Bilateral. Akustik Refleksler: 1000Hz üzeri yok.",
+                fallbackKeywords: ["presbiakuzi", "simetrik", "sensörinöral", "düşen", "tiz", "yaşlılık", "bilateral"]
+            },
+             {
+                id: "fallback2",
+                title: "Vaka 102",
+                difficulty: "Orta",
+                duration: 300,
+                multiplier: 1.25,
+                name: "Selin D.",
+                age: 32,
+                gender: "Kadın",
+                complaint: "İki taraflı işitme azlığı, hamilelik sonrası arttı.",
+                history: ["Aile öyküsü: Annesinde benzer kayıp", "Parakuzi Willis: Gürültüde daha iyi duyuyor"],
+                audiogramLeft: "Hava: 50dB, Kemik: 15dB (Carhart Çentiği 2000Hz'de +).",
+                audiogramRight: "Hava: 55dB, Kemik: 20dB.",
+                extra: "Timpanogram: Tip As (Düşük komplians). Refleksler alınamadı.",
+                fallbackKeywords: ["otoskleroz", "iletim", "carhart", "çentik", "stapes", "gebelik", "aile", "kemikçik"]
+            },
+            {
+                id: "fallback3",
+                title: "Vaka 103",
+                difficulty: "Zor",
+                duration: 180,
+                multiplier: 1.5,
+                name: "Murat S.",
+                age: 44,
+                gender: "Erkek",
+                complaint: "Sol kulakta çınlama ve dengesizlik.",
+                history: ["Tek taraflı tinnitus", "Telefonla konuşurken anlamıyor"],
+                audiogramLeft: "Sensörinöral kayıp, yüksek frekanslarda asimetrik düşüş. SDS %30 (Rollover).",
+                audiogramRight: "Normal sınırlar içerisinde. SDS %100.",
+                extra: "ABR: Sol V. dalga latansı uzamış. Tone Decay (+).",
+                fallbackKeywords: ["akustik nöroma", "tümör", "retrokoklear", "asimetrik", "sds", "rollover", "abr", "schwannoma"]
+            },
+            {
+                id: "fallback4",
+                title: "Vaka 104",
+                difficulty: "Orta",
+                duration: 360,
+                multiplier: 1.25,
+                name: "Kemal T.",
+                age: 50,
+                gender: "Erkek",
+                complaint: "Kulaklarda ötme ve tiz sesleri duyamama.",
+                history: ["Meslek: Metal işçisi (25 yıl)", "Koruyucu kullanmıyor"],
+                audiogramLeft: "4000Hz'de 60dB çentik (V tipi). Diğerleri daha iyi.",
+                audiogramRight: "4000Hz'de 55dB çentik.",
+                extra: "Timpanogram: Tip A. Refleksler: Var.",
+                fallbackKeywords: ["gürültü", "çentik", "4000", "meslek", "sensörinöral", "koruyucu", "tinnitus", "nihl"]
+            },
+            {
+                id: "fallback5",
+                title: "Vaka 105", 
+                difficulty: "Zor",
+                duration: 180,
+                multiplier: 1.5,
+                name: "Ece P.",
+                age: 28,
+                gender: "Kadın",
+                complaint: "Dün sabah uyandığımdan beri sol kulağım birden kapandı.",
+                history: ["Tıbbi geçmiş: Yok", "Baş dönmesi: Hafif", "Stres: Yüksek, son 1 ay içinde yoğun sınav dönemi"],
+                audiogramLeft: "Anında %70'in üzerinde kayıp. 250Hz: 60dB, 1000Hz: 75dB, 4000Hz: 80dB (SN).",
+                audiogramRight: "Tüm frekanslar 10dB altında (Normal).",
+                extra: "Timpanogram: Tip A Bilateral. Refleksler: Sol kulakta alınamadı. Tinnitus: Sol kulakta yoğun.",
+                fallbackKeywords: ["ani işitme kaybı", "tek taraflı", "idiyopatik", "acil", "sensörinöral", "kortikosteroid"]
+            },
+            {
+                id: "fallback6",
+                title: "Vaka 106", 
+                difficulty: "Orta",
+                duration: 300,
+                multiplier: 1.25,
+                name: "Mert Y.",
+                age: 55,
+                gender: "Erkek",
+                complaint: "Dönemsel olarak başım dönüyor, kulaklarımda dolgunluk hissi ve çınlama oluyor.",
+                history: ["Baş dönmesi: Dakikalar süren epizodlar", "İşitme: Düşük frekanslarda dalgalı kayıp öyküsü"],
+                audiogramLeft: "250Hz: 40dB, 500Hz: 35dB. Yüksek frekanslar normal. (Dalgalı düşük frekans SN kayıp)",
+                audiogramRight: "Normal sınırlar içerisinde.",
+                extra: "Timpanogram: Tip A. OAE: Sol düşük frekanslar başarısız. Gliserol testi: Öncesi ve sonrası ölçüm gerekli.",
+                fallbackKeywords: ["meniere", "endolenfatik hidrops", "dalgalı", "düşük frekans", "vertigo", "tinnitus", "dolgunluk", "sn kayıp"]
+            },
+            {
+                id: "fallback7",
+                title: "Vaka 107", 
+                difficulty: "Kolay",
+                duration: 600,
+                multiplier: 1.0,
+                name: "Zeynep A.",
+                age: 19,
+                gender: "Kadın",
+                complaint: "Sağ kulağım birkaç gündür tıkalı, kendi sesim yankılanıyor.",
+                history: ["Kulak çubuğu kullanımı: Sık", "Ağrı: Yok"],
+                audiogramLeft: "Normal.",
+                audiogramRight: "Tüm frekanslarda hava yolu 30-40dB civarında. Kemik yolu normal.",
+                extra: "Otoscopy: Sağ kulak yolunda total serumen tıkacı. Timpanogram: Tip B (Düz).",
+                fallbackKeywords: ["serumen", "kulak tıkacı", "iletil tipi", "hava kemik aralığı", "tip b", "otoscopy", "temizleme"]
+            }
         ];
 
-        // --- CORE FUNCTIONS ---
-        async function callGemini(prompt) {
-             if (!apiKey || apiKey.includes("BURAYA")) return null;
-             try {
-                const response = await fetch(geminiUrl, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ contents: [{ parts: [{ text: prompt }] }] }) });
-                const data = await response.json();
-                return data.candidates?.[0]?.content?.parts?.[0]?.text || null;
-            } catch (e) { console.error("AI Error", e); return null; }
-        }
-
-        // --- AUTH UI ---
-        function displayAuthError(msg) {
-            const el = document.getElementById('auth-error');
-            el.innerText = msg;
-            el.classList.remove('hidden');
-        }
-        
-        window.togglePasswordVisibility = function() {
-            const input = document.getElementById('auth-password');
-            const icon = document.getElementById('password-icon');
-            if (input.type === 'password') { input.type = 'text'; icon.classList.replace('fa-eye', 'fa-eye-slash'); }
-            else { input.type = 'password'; icon.classList.replace('fa-eye-slash', 'fa-eye'); }
-        }
-        
-        // --- EVENT LISTENERS ---
-        document.getElementById('auth-form').addEventListener('submit', (e) => {
-            e.preventDefault();
-            const email = document.getElementById('auth-email').value.trim();
-            const password = document.getElementById('auth-password').value.trim();
-            const name = document.getElementById('student-name').value.trim();
-            document.getElementById('auth-error').classList.add('hidden');
-
-            if (authMode === 'signup') {
-                if(!name) return displayAuthError("Ad soyad gereklidir.");
-                auth.createUserWithEmailAndPassword(email, password)
-                    .then((creds) => updateUserData(creds.user.uid, { name: name, solvedCases: [] }).then(() => { userName=name; initApp(); }))
-                    .catch(handleAuthError);
-            } else {
-                auth.signInWithEmailAndPassword(email, password)
-                    .then((creds) => loadUserDataAndSettings(creds.user.uid))
-                    .catch(handleAuthError);
+        // --- Helper: Call Gemini API (with Exponential Backoff) ---
+        async function callGemini(prompt, retries = 3, delay = 1000) {
+            for (let i = 0; i < retries; i++) {
+                try {
+                    const response = await fetch(geminiUrl, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ contents: [{ parts: [{ text: prompt }] }] })
+                    });
+                    if (response.ok) {
+                        const data = await response.json();
+                        return data.candidates?.[0]?.content?.parts?.[0]?.text || null;
+                    } else if (response.status === 429 && i < retries - 1) { // Rate limit
+                        await new Promise(resolve => setTimeout(resolve, delay));
+                        delay *= 2; // Exponential backoff
+                    } else {
+                        throw new Error(`API returned status ${response.status}`);
+                    }
+                } catch (error) {
+                    if (i === retries - 1) throw error;
+                    await new Promise(resolve => setTimeout(resolve, delay));
+                    delay *= 2;
+                }
             }
-        });
-
-        function handleAuthError(error) {
-            let msg = "Bir hata oluştu.";
-            if (error.code === 'auth/user-not-found' || error.code === 'auth/invalid-credential') msg = "Kullanıcı bulunamadı veya şifre yanlış.";
-            if (error.code === 'auth/wrong-password') msg = "Şifre hatalı.";
-            if (error.code === 'auth/email-already-in-use') msg = "Bu e-posta zaten kullanımda.";
-            if (error.code === 'auth/network-request-failed') msg = "Ağ hatası. İnternet bağlantınızı veya domain iznini kontrol edin.";
-            displayAuthError(msg);
+            return null; // Should not reach here
         }
 
-        // --- DATA LOADING ---
+        // --- Feature: Get AI Hint ---
+        async function getAIHint() {
+            if(!currentCaseId) return;
+            const btn = document.getElementById('hint-btn'), modal = document.getElementById('hint-modal'), hintText = document.getElementById('hint-text');
+            btn.innerHTML = '<i class="fa-solid fa-spinner animate-spin"></i> Düşünüyor...'; btn.disabled = true;
+            
+            if (apiKey === "BURAYA_KENDI_GEMINI_API_ANAHTARINIZI_YAPIŞTIRINIZ" || !apiKey) {
+                alert("Hata: Gemini API Anahtarı eksik. Lütfen kodu düzenleyip anahtarınızı ekleyin.");
+                btn.innerHTML = '<i class="fa-solid fa-wand-magic-sparkles"></i> ✨ İpucu Al (AI)'; btn.disabled = false;
+                return;
+            }
+
+            const c = dynamicCases.find(x => x.id === currentCaseId);
+            const prompt = `Sen bir Odyoloji hocasısın. Öğrenciye şu vaka hakkında KÜÇÜK bir ipucu ver: Vaka: ${c.title} Bulgular: Sol: ${c.audiogramLeft}, Sağ: ${c.audiogramRight}. Ekstra: ${c.extra}. Önemli: Tanıyı asla doğrudan söyleme. Sadece nereye bakması gerektiğine dair yönlendirici, merak uyandırıcı 1 cümlelik Türkçe ipucu ver.`;
+
+            try {
+                const result = await callGemini(prompt);
+                btn.innerHTML = '<i class="fa-solid fa-wand-magic-sparkles"></i> ✨ İpucu Al (AI)'; btn.disabled = false;
+                if(result) { hintText.innerText = result; modal.classList.add('active'); } else { alert("Yapay zeka şu an meşgul, birazdan tekrar deneyin."); }
+            } catch (e) {
+                console.error("Gemini Hint Error", e);
+                btn.innerHTML = '<i class="fa-solid fa-wand-magic-sparkles"></i> ✨ İpucu Al (AI)'; btn.disabled = false;
+                alert("Yapay zeka bağlantısında hata oluştu.");
+            }
+        }
+
+        // --- Feature: Hybrid AI/Local Grading ---
+        async function submitReportWithAI() {
+            if(!currentCaseId) return;
+            
+            const txt = document.getElementById('student-report').value;
+            if(txt.length < 15) { alert("Hocam çok kısa yazdınız, biraz daha tıbbi yorum lütfen."); return; }
+            
+            const c = dynamicCases.find(x => x.id === currentCaseId);
+            if (!c) return; 
+            
+            if (apiKey === "BURAYA_KENDI_GEMINI_API_ANAHTARINIZI_YAPIŞTIRINIZ" || !apiKey) {
+                 handleLocalFallback(txt, "Yapay zeka bağlantısı eksik. Liderlik Tablosu için raporunuz yerel olarak onaylandı.", c);
+                 return;
+            }
+
+            clearInterval(timerInterval);
+            document.getElementById('ai-loading').classList.remove('hidden');
+            document.getElementById('submit-btn').disabled = true;
+
+            lastCaseTitle = c.title;
+            const multiplier = c.multiplier || 1.0;
+
+            let score = 0;
+            let feedback = "";
+            let keywordsFound = [];
+            
+            const prompt = `
+                Act as a strict Audiology Professor. Grade this student report.
+                Case: ${c.title}, Left: ${c.audiogramLeft}, Right: ${c.audiogramRight}, Extra: ${c.extra}.
+                Student Report: "${txt}".
+                Return ONLY a raw JSON object: { "score": number (0-100), "feedback": "Turkish feedback string (max 2 sentences)", "keywords": ["string", "string"] }
+            `;
+
+            try {
+                const resultText = await callGemini(prompt);
+                if (!resultText) throw new Error("AI Empty");
+                
+                const jsonStr = resultText.replace(/```json/g, '').replace(/```/g, '').trim();
+                const result = JSON.parse(jsonStr);
+                
+                score = result.score;
+                feedback = result.feedback;
+                keywordsFound = result.keywords;
+
+            } catch (e) {
+                console.warn("AI Failed, switching to Local Grading:", e);
+                handleLocalFallback(txt, "Yapay zeka bağlantısında anlık yoğunluk yaşandı, ancak raporunuz anahtar kelimelere göre başarıyla değerlendirildi.", c);
+                return;
+            }
+
+            // Ağırlıklı Puan Hesaplama
+            let weightedScore = Math.round(score * multiplier);
+            let detailText = `Ham Puan: ${score}`;
+            if(multiplier > 1) detailText += ` x ${multiplier} (${c.difficulty} Bonus)`;
+
+            lastScore = weightedScore;
+            
+            // Sonucu Göster & Kaydet
+            document.getElementById('ai-loading').classList.add('hidden');
+            document.getElementById('submit-btn').disabled = false;
+            
+            showFeedback(weightedScore, feedback, keywordsFound, detailText);
+            saveScore(weightedScore);
+        }
+
+        function handleLocalFallback(txt, customFeedback, caseData) {
+            const c = caseData; 
+            
+            let hit = 0;
+            let keywordsFound = [];
+            const reportLower = txt.toLowerCase();
+            const fallbackKeys = (c.fallbackKeywords || []).map(k => k.toLowerCase());
+
+            fallbackKeys.forEach(k => {
+                if (reportLower.includes(k)) {
+                    hit++;
+                    keywordsFound.push(k);
+                }
+            });
+            
+            let score = 0;
+            if (fallbackKeys.length > 0) {
+                 score = Math.floor((hit / fallbackKeys.length) * 90);
+                 if(score > 0) score += 10;
+                 if(score > 100) score = 100;
+            }
+            
+            const multiplier = c.multiplier || 1.0;
+            let weightedScore = Math.round(score * multiplier);
+            let detailText = `Yerel Puan: ${score}`;
+            if(multiplier > 1) detailText += ` x ${multiplier} (${c.difficulty} Bonus)`;
+
+            lastScore = weightedScore;
+            
+            document.getElementById('ai-loading').classList.add('hidden');
+            document.getElementById('submit-btn').disabled = false;
+            
+            showFeedback(weightedScore, customFeedback, keywordsFound, detailText);
+            saveScore(weightedScore);
+        }
+
+        // --- AUTHENTICATION & USER DATA FUNCTIONS ---
+        
         auth.onAuthStateChanged((user) => {
             if (user) {
                 currentUser = user;
+                // Kullanıcı verilerini (isim, yetki, çözülen vakalar) paralel olarak çek
                 loadUserDataAndSettings(user.uid);
             } else {
+                // Kullanıcı yoksa login ekranını göster
                 document.getElementById('login-screen').classList.remove('hidden');
                 document.getElementById('main-content').classList.add('hidden');
-                toggleAuthMode('signin');
+                toggleAuthMode('signin'); // Varsayılan olarak Giriş Yap'ı göster
             }
         });
 
@@ -341,101 +778,688 @@
              const userRef = db.collection('artifacts').doc(appId).collection('users').doc(uid);
              const adminRef = db.collection('artifacts').doc(appId).collection('public').doc('data').collection('roles').doc(uid);
              
-             const [uDoc, aDoc] = await Promise.all([userRef.get().catch(()=>null), adminRef.get().catch(()=>null)]);
+             // 1. Veri çekme işlemlerini paralel olarak başlat
+             const [userDoc, adminDoc] = await Promise.all([
+                 userRef.get().catch(e => { console.error("Kullanıcı verisi çekilemedi", e); return null; }),
+                 adminRef.get().catch(e => { console.warn("Admin rolü kontrol edilemedi", e); return null; })
+             ]);
+
+             // 2. Kullanıcı Verilerini İşleme
+             let name = "";
+             let solved = [];
+             if (userDoc && userDoc.exists) {
+                name = userDoc.data().name || currentUser.email.split('@')[0];
+                solved = userDoc.data().solvedCases || [];
+             } else {
+                 name = currentUser.email.split('@')[0];
+             }
              
-             userName = (uDoc && uDoc.exists && uDoc.data().name) ? uDoc.data().name : currentUser.email.split('@')[0];
-             solvedCaseIds = new Set((uDoc && uDoc.exists && uDoc.data().solvedCases) ? uDoc.data().solvedCases : []);
-             isAdmin = (aDoc && aDoc.exists && aDoc.data().role === 'admin');
+             userName = name;
+             solvedCaseIds = new Set(solved);
+
+             // 3. Admin Yetkisini İşleme
+             isAdmin = (adminDoc && adminDoc.exists && adminDoc.data().role === 'admin');
              
+             // 4. Uygulamayı Başlat
              initApp();
         }
 
+        async function updateUserData(uid, data) {
+            const userRef = db.collection('artifacts').doc(appId).collection('users').doc(uid);
+            try {
+                await userRef.set(data, { merge: true });
+            } catch(e) {
+                console.error("Kullanıcı verisi güncellenemedi", e);
+            }
+        }
+        
+        // --- ADMIN PANEL FUNCTIONS ---
+        
+        function toggleAdminPanel() {
+            const panel = document.getElementById('admin-panel');
+            const main = document.getElementById('main-content');
+            
+            if (!isAdmin) return; 
+
+            if (panel.classList.contains('hidden')) {
+                panel.classList.remove('hidden');
+                main.classList.add('hidden');
+                updateAdminCaseForm(); // Yeni vaka numarasını belirle
+                loadManagementList(); // Vakaları listele
+            } else {
+                panel.classList.add('hidden');
+                main.classList.remove('hidden');
+                
+                // Vaka listesini yeniden yükle
+                loadDynamicCases();
+            }
+        }
+
+        function changeAdminTab(tabId) {
+            document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+            document.getElementById(tabId).classList.add('active');
+            document.querySelectorAll('.admin-tab-btn').forEach(btn => {
+                const isSelected = btn.onclick.toString().includes(`'${tabId}'`);
+                if (isSelected) {
+                    btn.classList.add('active', 'border-odyo-600', 'text-odyo-600');
+                    btn.classList.remove('border-transparent', 'text-gray-500');
+                } else {
+                    btn.classList.remove('active', 'border-odyo-600', 'text-odyo-600');
+                    btn.classList.add('border-transparent', 'text-gray-500');
+                }
+            });
+            if (tabId === 'list-cases') loadManagementList();
+            if (tabId === 'add-case') updateAdminCaseForm();
+        }
+        
+        // Yeni Vaka Numarası Hesaplama ve Formu Güncelleme
+        async function updateAdminCaseForm() {
+             const caseCollectionRef = db.collection('artifacts').doc(appId).collection('public').doc('data').collection('cases');
+             
+             try {
+                 const snapshot = await caseCollectionRef.get();
+                 let maxCaseNumber = 100;
+                 
+                 snapshot.forEach(doc => {
+                     const title = doc.data().title;
+                     if (title && title.startsWith('Vaka ')) {
+                         const number = parseInt(title.substring(5));
+                         if (number > maxCaseNumber) {
+                             maxCaseNumber = number;
+                         }
+                     }
+                 });
+                 
+                 const nextCaseNumber = maxCaseNumber + 1;
+                 document.getElementById('new-case-title').value = `Vaka ${nextCaseNumber}`;
+                 
+             } catch (e) {
+                 console.error("Vaka numarası belirlenemedi, varsayılan 101 kullanılıyor.", e);
+                 document.getElementById('new-case-title').value = `Vaka 101`;
+             }
+        }
+
+        document.getElementById('add-case-form').addEventListener('submit', handleAddCase);
+
+        async function handleAddCase(e) {
+            e.preventDefault();
+            const form = e.target;
+            const difficultySelect = document.getElementById('new-case-difficulty');
+            const selectedOption = difficultySelect.options[difficultySelect.selectedIndex];
+
+            const newCase = {
+                title: form['new-case-title'].value, // Otomatik belirlenen Vaka Adı
+                difficulty: difficultySelect.value,
+                duration: parseInt(selectedOption.getAttribute('data-duration')),
+                multiplier: parseFloat(selectedOption.getAttribute('data-multiplier')),
+                name: form['new-case-name'].value,
+                age: parseInt(form['new-case-age'].value),
+                gender: form['new-case-gender'].value,
+                complaint: form['new-case-complaint'].value,
+                audiogramLeft: form['new-case-audiogram-left'].value,
+                audiogramRight: form['new-case-audiogram-right'].value,
+                extra: form['new-case-extra'].value,
+                fallbackKeywords: form['new-case-fallback-keywords'].value.toLowerCase().split(',').map(k => k.trim()).filter(k => k.length > 0),
+                createdAt: firebase.firestore.FieldValue.serverTimestamp()
+            };
+
+            const ref = db.collection('artifacts').doc(appId).collection('public').doc('data').collection('cases');
+            
+            try {
+                const docRef = await ref.add(newCase);
+                document.getElementById('admin-message').innerText = `Vaka başarıyla eklendi! ID: ${docRef.id}`;
+                document.getElementById('admin-message').classList.remove('hidden', 'text-red-600');
+                document.getElementById('admin-message').classList.add('text-green-600');
+                form.reset();
+                updateAdminCaseForm(); // Yeni vaka numarasını hemen hesapla
+                setTimeout(() => document.getElementById('admin-message').classList.add('hidden'), 3000);
+            } catch (error) {
+                console.error("Vaka ekleme hatası:", error);
+                document.getElementById('admin-message').innerText = `HATA: Vaka eklenemedi. Firebase Güvenlik Kurallarınızı kontrol edin.`;
+                document.getElementById('admin-message').classList.remove('hidden', 'text-green-600');
+                document.getElementById('admin-message').classList.add('text-red-600');
+                setTimeout(() => document.getElementById('admin-message').classList.add('hidden'), 5000);
+            }
+        }
+        
+        function loadManagementList() {
+             const list = document.getElementById('dynamic-case-management-list');
+             list.innerHTML = '<p class="text-gray-500 text-sm">Vakalar yükleniyor...</p>';
+             
+             const ref = db.collection('artifacts').doc(appId).collection('public').doc('data').collection('cases');
+             
+             ref.get().then(snap => {
+                 if (snap.empty) {
+                     list.innerHTML = '<p class="text-red-500 font-medium">Hiç vaka bulunamadı. Lütfen önce bir vaka ekleyin.</p>';
+                     return;
+                 }
+                 
+                 list.innerHTML = snap.docs.map(doc => {
+                     const c = doc.data();
+                     const keywords = (c.fallbackKeywords || []).join(', ');
+                     return `
+                         <div class="bg-gray-50 p-4 rounded-lg border border-gray-200">
+                            <div class="flex justify-between items-center mb-2">
+                                <span class="font-bold text-gray-800">${c.title} (${c.difficulty})</span>
+                                <button onclick="deleteCase('${doc.id}')" class="text-red-500 hover:text-red-700 text-sm transition">
+                                    <i class="fa-solid fa-trash-alt"></i> Sil
+                                </button>
+                            </div>
+                            <p class="text-xs text-gray-600">Hasta: ${c.name} (${c.age}) - Süre: ${c.duration/60} dk</p>
+                            <p class="text-xs text-gray-400 mt-1 truncate">Anahtar: ${keywords}</p>
+                         </div>
+                     `;
+                 }).join('');
+             }).catch(e => {
+                 list.innerHTML = `<p class="text-red-500 font-medium">HATA: Vakalar listelenemedi. Yetkinizi kontrol edin.</p>`;
+                 console.error("Vaka listeleme hatası:", e);
+             });
+        }
+        
+        async function deleteCase(caseId) {
+             if (!confirm('Bu vakayı silmek istediğinizden emin misiniz? Bu işlem geri alınamaz.')) return;
+             
+             const ref = db.collection('artifacts').doc(appId).collection('public').doc('data').collection('cases').doc(caseId);
+             
+             try {
+                 await ref.delete();
+                 alert("Vaka başarıyla silindi!");
+                 loadManagementList(); // Listeyi yenile
+             } catch (e) {
+                 console.error("Vaka silme hatası:", e);
+                 alert("HATA: Vaka silinirken sorun oluştu. Yetkinizi kontrol edin.");
+             }
+        }
+        
+        // --- DYNAMIC CASE LOADING ---
+        
+        function loadDynamicCases() {
+             const caseCollectionRef = db.collection('artifacts').doc(appId).collection('public').doc('data').collection('cases');
+
+             caseCollectionRef.onSnapshot(snapshot => {
+                 let fetchedCases = [];
+                 if (!snapshot.empty) {
+                     fetchedCases = snapshot.docs.map(doc => ({
+                         id: doc.id,
+                         ...doc.data(),
+                         multiplier: parseFloat(doc.data().multiplier) || 1.0, // Multiplier'ı sayıya çevir
+                         duration: parseInt(doc.data().duration) || 300 // Duration'ı sayıya çevir
+                     }));
+                 } 
+                 
+                 if (fetchedCases.length === 0) {
+                     // Eğer Firestore boşsa, yedek vakaları ID'leri ile birlikte kullan.
+                     dynamicCases = FALLBACK_CASES.map((c, i) => ({...c, id: `f${i}`})); 
+                     if(currentUser) console.warn("Firestore'da vaka bulunamadı. Yedek vakalar kullanılıyor.");
+                 } else {
+                     dynamicCases = fetchedCases;
+                 }
+
+                 renderLists();
+             }, error => {
+                 console.error("Vaka verisi çekilemedi:", error);
+                 dynamicCases = FALLBACK_CASES.map((c, i) => ({...c, id: `f${i}`}));
+                 renderLists();
+             });
+        }
+        
+        // --- AUTH FORMS ---
+        
+        function displayAuthError(message) {
+            const errorElement = document.getElementById('auth-error');
+            errorElement.innerText = message;
+            errorElement.classList.remove('hidden');
+        }
+
+        function toggleAuthMode(mode = null) {
+            if (mode) {
+                authMode = mode;
+            } else {
+                authMode = authMode === 'signup' ? 'signin' : 'signup';
+            }
+            
+            const title = document.getElementById('auth-title');
+            const submitBtnText = document.getElementById('auth-submit-btn').querySelector('span');
+            const toggleLink = document.getElementById('toggle-auth');
+            const nameField = document.getElementById('name-field');
+            const icon = document.getElementById('auth-submit-btn').querySelector('i');
+            
+            document.getElementById('auth-error').classList.add('hidden');
+
+            if (authMode === 'signin') {
+                title.innerText = "Giriş Yap";
+                submitBtnText.innerText = "Giriş Yap";
+                toggleLink.innerText = "Kayıt Ol";
+                nameField.classList.add('hidden');
+                icon.className = 'fa-solid fa-arrow-right';
+            } else {
+                title.innerText = "Hesap Oluştur";
+                submitBtnText.innerText = "Kayıt Ol";
+                toggleLink.innerText = "Giriş Yap";
+                nameField.classList.remove('hidden');
+                icon.className = 'fa-solid fa-user-plus';
+            }
+        }
+
+        // --- PASSWORD VISIBILITY TOGGLE ---
+        window.togglePasswordVisibility = function() {
+            const passwordInput = document.getElementById('auth-password');
+            const passwordIcon = document.getElementById('password-icon');
+            
+            if (passwordInput.type === 'password') {
+                passwordInput.type = 'text';
+                passwordIcon.classList.remove('fa-eye');
+                passwordIcon.classList.add('fa-eye-slash');
+            } else {
+                passwordInput.type = 'password';
+                passwordIcon.classList.remove('fa-eye-slash');
+                passwordIcon.classList.add('fa-eye');
+            }
+        }
+
+        document.getElementById('auth-form').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const email = document.getElementById('auth-email').value.trim();
+            const password = document.getElementById('auth-password').value.trim();
+            const name = document.getElementById('student-name').value.trim();
+            
+            document.getElementById('auth-error').classList.add('hidden');
+
+            if (authMode === 'signup') {
+                if (!name || password.length < 6) {
+                     displayAuthError("Adınız ve en az 6 karakterli şifre zorunludur.");
+                     return;
+                }
+                handleSignUp(email, password, name);
+            } else {
+                handleSignIn(email, password);
+            }
+        });
+
+        document.getElementById('toggle-auth').addEventListener('click', (e) => {
+            e.preventDefault();
+            toggleAuthMode();
+        });
+
+        async function handleSignUp(email, password, name) {
+            try {
+                const userCredential = await auth.createUserWithEmailAndPassword(email, password);
+                await updateUserData(userCredential.user.uid, { name: name, solvedCases: [] }); // Firestore'a ismi kaydet
+                userName = name;
+                initApp();
+            } catch (error) {
+                let errorMessage = "Kayıt başarısız oldu. Lütfen tekrar deneyin.";
+                if (error.code === 'auth/email-already-in-use') {
+                    errorMessage = "Bu e-posta adresi zaten kayıtlı.";
+                } else if (error.code === 'auth/invalid-email') {
+                    errorMessage = "Geçersiz e-posta formatı.";
+                } else if (error.code === 'auth/weak-password') {
+                    errorMessage = "Şifreniz çok zayıf (en az 6 karakter olmalı).";
+                }
+                displayAuthError(errorMessage);
+            }
+        }
+
+        async function handleSignIn(email, password) {
+            try {
+                const userCredential = await auth.signInWithEmailAndPassword(email, password);
+                loadUserDataAndSettings(userCredential.user.uid); // Başarılı girişten sonra verileri çek
+            } catch (error) {
+                let errorMessage = "Giriş başarısız oldu. E-posta veya şifre hatalı.";
+                if (error.code === 'auth/user-not-found' || error.code === 'auth/wrong-password') {
+                    errorMessage = "E-posta veya şifre hatalı.";
+                }
+                displayAuthError(errorMessage);
+            }
+        }
+
+        function handleSignOut() {
+            auth.signOut().then(() => {
+                // Çıkış başarılı
+                solvedCaseIds.clear();
+                currentUser = null;
+                userName = "";
+                isAdmin = false;
+                document.getElementById('admin-btn').classList.add('hidden');
+                document.getElementById('login-screen').classList.remove('hidden');
+                document.getElementById('user-display').classList.add('hidden');
+                document.getElementById('case-content').classList.add('hidden');
+                document.getElementById('empty-state').classList.remove('hidden');
+                document.getElementById('timer-container').classList.add('hidden');
+                document.getElementById('main-content').classList.remove('hidden'); 
+                loadDynamicCases(); // Vaka listesini resetle
+            }).catch((error) => {
+                console.error("Çıkış hatası:", error);
+                alert("Çıkış yapılırken bir hata oluştu.");
+            });
+        }
+        
+        // --- CORE UI & DATA FUNCTIONS ---
+        
         function initApp() {
             document.getElementById('login-screen').classList.add('hidden');
             document.getElementById('main-content').classList.remove('hidden');
             document.getElementById('user-display').classList.remove('hidden');
             document.getElementById('user-display').classList.add('flex');
             document.getElementById('username-span').innerText = userName;
-            if (isAdmin) document.getElementById('admin-btn').classList.remove('hidden');
-            else document.getElementById('admin-btn').classList.add('hidden');
             
-            loadDynamicCases();
+            if (isAdmin) {
+                document.getElementById('admin-btn').classList.remove('hidden');
+            } else {
+                document.getElementById('admin-btn').classList.add('hidden');
+            }
+            
             startLeaderboardListener();
+            loadDynamicCases(); 
         }
-        
-        // --- EXPORTS ---
-        // (Diğer tüm fonksiyonlar önceki mantıkla aynı şekilde buraya dahil edilmiştir)
-        // Kısaltma amacıyla yukarıdaki kod bloklarındaki loadCase, submitReport, Admin fonksiyonlarını buraya eklediğinizi varsayıyorum.
-        // Tam çalışan kopyayı yukarıdaki ana bloktan alabilirsiniz.
-        
-        // UI Helper
-        window.toggleAuthMode = function(mode) {
-            authMode = mode || (authMode === 'signup' ? 'signin' : 'signup');
-            const isSignin = authMode === 'signin';
-            document.getElementById('auth-title').innerText = isSignin ? "Giriş Yap" : "Hesap Oluştur";
-            document.getElementById('auth-submit-btn').querySelector('span').innerText = isSignin ? "Giriş Yap" : "Kayıt Ol";
-            document.getElementById('toggle-auth').innerText = isSignin ? "Kayıt Ol" : "Giriş Yap";
-            isSignin ? document.getElementById('name-field').classList.add('hidden') : document.getElementById('name-field').classList.remove('hidden');
-            document.getElementById('auth-error').classList.add('hidden');
-        };
-        
-        document.getElementById('toggle-auth').onclick = () => window.toggleAuthMode();
-        
-        async function updateUserData(uid, data) {
-            try { await db.collection('artifacts').doc(appId).collection('users').doc(uid).set(data, {merge: true}); } catch(e){}
-        }
-        
-        // ... (Admin, Case Loading, AI Logic - same as previous complete block) ...
-        // NOTE: In the final copy provided above, all logic is included.
-        
-        window.handleSignOut = () => auth.signOut().then(() => location.reload());
-        
-        // ... (Load Dynamic Cases, Render Lists, Submit Report logic included in main block) ...
-        
-        function loadDynamicCases() {
-             const ref = db.collection('artifacts').doc(appId).collection('public').doc('data').collection('cases');
-             ref.onSnapshot(snap => {
-                 dynamicCases = snap.empty ? FALLBACK_CASES : snap.docs.map(d => ({ id: d.id, ...d.data() }));
-                 renderLists();
-             });
-        }
-        
+
         function renderLists() {
-            const list = document.getElementById('case-list');
-            const sel = document.getElementById('mobile-case-select');
-            list.innerHTML = ''; sel.innerHTML = '<option disabled selected>Seçiniz...</option>';
+            const cases = dynamicCases;
+            const desktopList = document.getElementById('case-list');
+            const mobileSelect = document.getElementById('mobile-case-select');
             
-            dynamicCases.forEach(c => {
+            desktopList.innerHTML = '';
+            mobileSelect.innerHTML = '<option value="" disabled selected>Bir hasta seçiniz...</option>';
+
+            if (cases.length === 0) {
+                 desktopList.innerHTML = '<p class="text-red-500 text-sm p-3">Hiç vaka bulunamadı. Adminler vaka eklemeli.</p>';
+                 return;
+            }
+
+            cases.forEach(c => {
+                let diffClass = "bg-green-100 text-green-700 border-green-200";
+                let barColor = "bg-green-500";
+                if(c.difficulty === "Orta") { diffClass = "bg-yellow-100 text-yellow-700 border-yellow-200"; barColor = "bg-yellow-400"; }
+                if(c.difficulty === "Zor") { diffClass = "bg-red-100 text-red-700 border-red-200"; barColor = "bg-red-500"; }
+
                 const isSolved = solvedCaseIds.has(c.id);
+                const solvedStyle = isSolved ? "case-completed" : "";
+                const badge = isSolved ? `<span class="bg-gray-800 text-white text-[10px] px-2 py-0.5 rounded font-bold uppercase ml-2">Tamamlandı</span>` : "";
+
                 const div = document.createElement('div');
-                div.className = `bg-white p-4 rounded-xl border border-gray-100 hover:border-odyo-300 cursor-pointer transition mb-2 ${isSolved ? 'case-completed' : ''}`;
-                if (!isSolved) div.onclick = () => loadCase(c.id);
-                div.innerHTML = `<div class="flex justify-between"><span class="font-bold text-sm">${c.title} ${isSolved ? '(Tamamlandı)' : ''}</span><span class="text-xs bg-gray-100 px-2 rounded">${c.difficulty}</span></div>`;
-                list.appendChild(div);
+                div.className = `bg-white p-4 rounded-xl border border-gray-100 hover:border-odyo-300 hover:shadow-md transition cursor-pointer group relative overflow-hidden select-none ${solvedStyle}`;
+                if(!isSolved) div.onclick = () => loadCase(c.id);
                 
-                const opt = document.createElement('option'); opt.value = c.id; opt.innerText = c.title; if(isSolved) opt.disabled = true;
-                sel.appendChild(opt);
+                div.innerHTML = `
+                    <div class="absolute left-0 top-0 bottom-0 w-1 ${barColor}"></div>
+                    <div class="pl-3">
+                        <div class="flex justify-between items-start mb-1">
+                            <div class="flex items-center">
+                                <span class="font-bold text-sm text-gray-800 group-hover:text-odyo-700 transition truncate pr-2">${c.title}</span>
+                                ${badge}
+                            </div>
+                            <span class="text-[10px] font-bold uppercase px-1.5 py-0.5 rounded border ${diffClass}">${c.difficulty}</span>
+                        </div>
+                        <div class="flex items-center gap-3 text-xs text-gray-400">
+                            <span><i class="fa-solid fa-stopwatch mr-1"></i>${c.duration/60} dk</span>
+                        </div>
+                    </div>
+                `;
+                desktopList.appendChild(div);
+
+                const opt = document.createElement('option');
+                opt.value = c.id;
+                opt.innerText = `${c.title} (${c.difficulty}) ${isSolved ? '- [BİTTİ]' : ''}`;
+                if(isSolved) opt.disabled = true;
+                mobileSelect.appendChild(opt);
             });
-            sel.onchange = (e) => loadCase(e.target.value);
+
+            mobileSelect.onchange = (e) => loadCase(e.target.value);
         }
-        
-        window.loadCase = function(id) {
-             currentCaseId = id;
-             const c = dynamicCases.find(x => x.id === id);
-             document.getElementById('empty-state').classList.add('hidden');
-             document.getElementById('case-content').classList.remove('hidden');
-             document.getElementById('patient-name').innerText = c.name;
-             document.getElementById('patient-details').innerText = `${c.age} / ${c.gender}`;
-             document.getElementById('difficulty-badge').innerText = c.difficulty;
-             document.getElementById('left-ear-data').innerText = c.audiogramLeft;
-             document.getElementById('right-ear-data').innerText = c.audiogramRight;
-             document.getElementById('extra-findings').innerText = c.extra;
-             document.getElementById('full-complaint').innerText = c.complaint;
-             document.getElementById('student-report').value = '';
-             // Timer logic here...
+
+        function loadCase(id) {
+            if(solvedCaseIds.has(id)) { alert("Hocam, bu vakayı zaten başarıyla tamamladınız!"); return; }
+
+            clearInterval(timerInterval);
+            currentCaseId = id;
+            const c = dynamicCases.find(x => x.id === id);
+            if (!c) return; // Case not found, should not happen
+
+            lastCaseTitle = c.title;
+
+            document.getElementById('empty-state').classList.add('hidden');
+            document.getElementById('case-content').classList.remove('hidden');
+            document.getElementById('timeout-overlay').classList.add('hidden');
+            document.getElementById('time-warning').classList.add('hidden');
+            
+            const reportArea = document.getElementById('student-report');
+            reportArea.disabled = false;
+            reportArea.value = '';
+            document.getElementById('submit-btn').disabled = false;
+
+            document.getElementById('patient-name').innerText = c.name;
+            document.getElementById('patient-details').innerHTML = `<i class="fa-solid fa-venus-mars mr-1"></i> ${c.age} Yıl &bull; ${c.gender}`;
+            document.getElementById('difficulty-badge').innerText = c.difficulty;
+            
+            let diffColor = "bg-green-100 text-green-700";
+            if(c.difficulty==="Orta") diffColor = "bg-yellow-100 text-yellow-700";
+            if(c.difficulty==="Zor") diffColor = "bg-red-100 text-red-700";
+            document.getElementById('difficulty-badge').className = `text-[10px] px-2 py-0.5 rounded font-bold uppercase tracking-wide ${diffColor}`;
+            
+            let barColor = "bg-green-500";
+            if(c.difficulty==="Orta") barColor = "bg-yellow-400";
+            if(c.difficulty==="Zor") barColor = "bg-red-500";
+            document.getElementById('difficulty-bar').className = `absolute top-0 left-0 w-1.5 h-full ${barColor}`;
+
+            document.getElementById('full-complaint').innerText = `"${c.complaint}"`;
+            document.getElementById('left-ear-data').innerText = c.audiogramLeft;
+            document.getElementById('right-ear-data').innerText = c.audiogramRight;
+            document.getElementById('extra-findings').innerText = c.extra;
+
+            const hList = document.getElementById('history-list');
+            const historyItems = (c.history || c.complaint).split('\n'); 
+            
+            hList.innerHTML = (c.history || []).map(h => `<li class="flex items-start gap-2 text-sm text-gray-600"><i class="fa-solid fa-caret-right text-odyo-400 mt-1"></i> ${h}</li>`).join('');
+
+            if(window.innerWidth < 768) { document.querySelector('main').scrollTop = 0; }
+
+            startTimer(c.duration);
         }
-        
-        // ... (Rest of the logic matches the provided complete block) ...
+
+        function startTimer(seconds) {
+            timeLeft = seconds;
+            updateTimerUI();
+            const container = document.getElementById('timer-container');
+            container.classList.remove('hidden'); container.classList.add('flex');
+            container.classList.remove('bg-red-600', 'animate-pulse-fast'); container.classList.add('bg-gray-900');
+
+            timerInterval = setInterval(() => {
+                timeLeft--;
+                updateTimerUI();
+                if (timeLeft === 60) {
+                    document.getElementById('time-warning').classList.remove('hidden');
+                    container.classList.remove('bg-gray-900');
+                    container.classList.add('bg-red-600', 'animate-pulse-fast');
+                }
+                if (timeLeft <= 0) {
+                    clearInterval(timerInterval);
+                    handleTimeout();
+                }
+            }, 1000);
+        }
+
+        function updateTimerUI() {
+            const m = Math.floor(timeLeft / 60);
+            const s = timeLeft % 60;
+            document.getElementById('timer-display').innerText = `${m}:${s.toString().padStart(2,'0')}`;
+        }
+
+        function handleTimeout() {
+            document.getElementById('timer-container').classList.remove('animate-pulse-fast');
+            document.getElementById('timeout-overlay').classList.remove('hidden');
+            document.getElementById('student-report').disabled = true;
+            document.getElementById('submit-btn').disabled = true;
+            document.getElementById('time-warning').classList.add('hidden');
+        }
+
+        function resetCase() {
+            document.getElementById('case-content').classList.add('hidden');
+            document.getElementById('empty-state').classList.remove('hidden');
+            document.getElementById('timer-container').classList.add('hidden');
+            document.getElementById('mobile-case-select').value = "";
+        }
+
+        function showFeedback(score, text, keys, detailText) {
+            const modal = document.getElementById('feedback-modal');
+            document.getElementById('score-display').innerText = score;
+            document.getElementById('score-calc-detail').innerText = detailText || "PUAN";
+            document.getElementById('feedback-text').innerText = text;
+            
+            const kd = document.getElementById('keywords-display');
+            if(keys && keys.length > 0) {
+                kd.innerHTML = keys.map(k => `<span class="bg-white text-gray-600 px-2 py-1 rounded text-[10px] border border-gray-200 font-bold shadow-sm uppercase"><i class="fa-solid fa-check text-green-500 mr-1"></i>${k}</span>`).join('');
+            } else {
+                kd.innerHTML = '<span class="text-xs text-gray-400">Anahtar kelime bulunamadı.</span>';
+            }
+
+            modal.classList.add('active');
+            modal.querySelector('.transform').classList.remove('scale-95');
+            modal.querySelector('.transform').classList.add('scale-100');
+
+            if(score >= 80) { triggerConfetti(); }
+            
+            // Vakayı çözülenler listesine ekle ve listeyi yenile
+            solvedCaseIds.add(currentCaseId);
+            renderLists();
+            // Kullanıcının solvedCases listesini Firestore'a kaydet
+            updateUserData(currentUser.uid, { solvedCases: Array.from(solvedCaseIds) });
+        }
+
+        function triggerConfetti() {
+            const duration = 3000;
+            const end = Date.now() + duration;
+            (function frame() {
+                confetti({ particleCount: 3, angle: 60, spread: 55, origin: { x: 0 }, colors: ['#0ea5e9', '#14b8a6', '#f59e0b'] });
+                confetti({ particleCount: 3, angle: 120, spread: 55, origin: { x: 1 }, colors: ['#0ea5e9', '#14b8a6', '#f59e0b'] });
+                if (Date.now() < end) { requestAnimationFrame(frame); }
+            }());
+        }
+
+        function closeFeedback() {
+            const modal = document.getElementById('feedback-modal');
+            modal.classList.remove('active');
+            resetCase();
+        }
+
+        function shareResult() {
+            const text = ` Cerrahpaşa OdyoCase'de "${lastCaseTitle}" vakasını çözdüm ve ${lastScore} puan aldım! 🩺👂 Sıkıysa geç!`;
+            navigator.clipboard.writeText(text).then(() => {
+                const toast = document.getElementById('share-toast');
+                toast.classList.remove('hidden');
+                setTimeout(() => toast.classList.add('opacity-100'), 10);
+                setTimeout(() => {
+                    toast.classList.remove('opacity-100');
+                    setTimeout(() => toast.classList.add('hidden'), 500);
+                }, 2000);
+            });
+        }
+
+        async function saveScore(s) {
+            if(!currentUser) return;
+            // Firestore kuralına uygun olarak uid bazlı skor kaydı yapılır.
+            const ref = db.collection('artifacts').doc(appId).collection('public').doc('data').collection('leaderboard');
+            try {
+                await ref.add({
+                    u: userName,
+                    uid: currentUser.uid, // Sıralama için UID zorunlu
+                    s: s,
+                    cid: currentCaseId,
+                    t: firebase.firestore.FieldValue.serverTimestamp()
+                });
+            } catch(e) { console.error("Score Kaydetme Hatası. Firebase ayarlarınızı ve kurallarınızı kontrol edin.", e); }
+        }
+
+        function startLeaderboardListener() {
+            const list = document.getElementById('leaderboard-list');
+            const ref = db.collection('artifacts').doc(appId).collection('public').doc('data').collection('leaderboard');
+            
+            ref.onSnapshot(snap => {
+                let userMap = new Map();
+                let scoreMap = new Map(); // Kullanıcıların toplam skorunu tutmak için
+
+                snap.forEach(doc => {
+                    const data = doc.data();
+                    const name = data.u || "Bilinmeyen Kullanıcı";
+                    const score = data.s || 0;
+                    const uid = data.uid;
+
+                    // UID bazlı toplam skor hesaplama
+                    if (scoreMap.has(uid)) {
+                        scoreMap.set(uid, scoreMap.get(uid) + score);
+                    } else {
+                        scoreMap.set(uid, score);
+                    }
+                    // UID bazlı isim eşleştirme (en son kullanılan ismi tutar)
+                    userMap.set(uid, name);
+                });
+
+                // Toplam skorları kullanıcı isimleriyle birleştir
+                let sortedUsers = Array.from(scoreMap, ([uid, totalScore]) => ({ u: userMap.get(uid), s: totalScore })).sort((a, b) => b.s - a.s);
+
+                list.innerHTML = sortedUsers.slice(0, 20).map((x, i) => `
+                    <div class="flex items-center justify-between bg-white p-3 rounded-lg border border-gray-100 shadow-sm">
+                        <div class="flex items-center gap-3">
+                            <div class="w-6 h-6 rounded-full ${i<3 ? 'bg-yellow-100 text-yellow-700' : 'bg-gray-100 text-gray-500'} flex items-center justify-center font-bold text-xs">
+                                ${i+1}
+                            </div>
+                            <div class="overflow-hidden">
+                                <div class="font-bold text-gray-800 text-xs sm:text-sm truncate w-32 sm:w-auto">${x.u}</div>
+                                <div class="text-[10px] text-gray-400 truncate">Toplam Puan</div>
+                            </div>
+                        </div>
+                        <div class="font-mono font-bold text-odyo-600">${x.s}</div>
+                    </div>
+                `).join('');
+            });
+        }
+
+        function toggleLeaderboard() {
+            const p = document.getElementById('leaderboard-panel');
+            const o = document.getElementById('leaderboard-overlay');
+            if(p.classList.contains('translate-x-full')) {
+                p.classList.remove('translate-x-full');
+                o.classList.remove('hidden');
+            } else {
+                p.classList.add('translate-x-full');
+                o.classList.add('hidden');
+            }
+        }
+
+        // --- EXPOSE FUNCTIONS TO WINDOW ---
+        window.submitReportWithAI = submitReportWithAI;
+        window.getAIHint = getAIHint;
+        window.loadCase = loadCase;
+        window.closeFeedback = closeFeedback;
+        window.shareResult = shareResult;
+        window.toggleLeaderboard = toggleLeaderboard;
+        window.resetCase = resetCase;
+        window.handleSignOut = handleSignOut;
+        window.toggleAdminPanel = toggleAdminPanel;
+        window.changeAdminTab = changeAdminTab;
+        window.deleteCase = deleteCase;
+        window.loadManagementList = loadManagementList;
+        window.updateAdminCaseForm = updateAdminCaseForm;
+        // Add togglePasswordVisibility to window
+        window.togglePasswordVisibility = function() {
+            const passwordInput = document.getElementById('auth-password');
+            const passwordIcon = document.getElementById('password-icon');
+            
+            if (passwordInput.type === 'password') {
+                passwordInput.type = 'text';
+                passwordIcon.classList.remove('fa-eye');
+                passwordIcon.classList.add('fa-eye-slash');
+            } else {
+                passwordInput.type = 'password';
+                passwordIcon.classList.remove('fa-eye-slash');
+                passwordIcon.classList.add('fa-eye');
+            }
+        }
+
+
+        // Sayfa yüklendiğinde varsayılan admin paneli sekmesini aktif et
+        window.onload = () => {
+             document.getElementById('add-case').classList.add('active');
+        }
 
     </script>
 </body>
