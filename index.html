@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>| OdyoCase |</title>
+    <title>OdyoCase | Cerrahpaşa AI</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
@@ -100,6 +100,7 @@
             
             <form id="auth-form" class="space-y-4" onsubmit="event.preventDefault(); handleAuthSubmit();">
                 <div id="name-field" class="hidden">
+                    <!-- DİKKAT: 'required' özelliği buradan kaldırıldı. Kontrol JS tarafında yapılıyor. -->
                     <input type="text" id="student-name" placeholder="Adınız Soyadınız (Örn: Burak)" class="w-full px-4 py-3.5 border border-gray-300 rounded-xl focus:ring-2 focus:ring-odyo-500 focus:border-odyo-500 outline-none text-center font-semibold text-gray-800 placeholder-gray-400 transition bg-gray-50 focus:bg-white">
                 </div>
                 <div>
@@ -127,7 +128,7 @@
     </div>
     
     <!-- Admin Panel Container -->
-    <div id="admin-panel" class="fixed inset-0 z-40 bg-white/95 backdrop-blur-sm hidden overflow-y-auto admin-section">
+    <div id="admin-panel" class="fixed inset-0 z-40 bg-white/95 backdrop-blur-sm hidden overflow-y-auto admin-section hidden">
         <div class="max-w-4xl mx-auto p-4 sm:p-8">
             <div class="flex justify-between items-center mb-6 border-b pb-4">
                 <h1 class="text-2xl font-bold text-gray-900 flex items-center gap-3">
